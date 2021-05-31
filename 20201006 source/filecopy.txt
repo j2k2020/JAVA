@@ -1,0 +1,50 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class StringParser {
+
+	public static void main(String[] args) throws IOException{
+		
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("명령어를  입력하세요?(예 copy a.txt b.txt)");
+		String cmd = br.readLine();
+		System.out.println(cmd);
+	
+		//명령어 분리
+		String[] arr=cmd.split(" ");
+					
+		for(int i=0; i<arr.length;i++) {
+			System.out.println(arr[i]);
+		}
+		
+		//조건문으로 입력 확인
+		
+		//a.txt를 가지고 오는 작업
+		//파일 내용을 가지고 와서 출력
+				File f=new File(arr[1]);
+				FileReader fr=new FileReader(f);
+				br=new BufferedReader(fr);
+				
+				//System.out.println(br.readLine());
+				StringBuffer sb=new StringBuffer();
+				String s="";
+				while((s=br.readLine())!=null){
+					sb.append(s+"\n");
+					}
+				s=sb.toString();  //s안에는 a.txt내용이 들어 있음
+				System.out.println(s);
+				
+				//FileWriter이용해서 b.txt를 쓰는 작업
+				FileWriter fw = new FileWriter(arr[2]);
+				//만든파일(FileWriter)에 내용을 삽입
+				fw.write(s);
+				fw.close();
+		
+		
+	}
+
+}
